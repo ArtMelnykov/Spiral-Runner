@@ -6,11 +6,13 @@ namespace CodeBase.Infrastructure.UI.MainMenu
 {
     public class TextAnimation : MonoBehaviour
     {
+        [Header("Dependencies")] 
         [SerializeField]
         private TextMeshProUGUI _button;
+        
         private Color _buttonColor;
 
-        void Start()
+        private void Start()
         {
             _buttonColor = _button.color;
             _buttonColor.a = 1;
@@ -26,7 +28,6 @@ namespace CodeBase.Infrastructure.UI.MainMenu
                 yield return FadeOut();
 
                 yield return FadeIn();
-                
             }
         }
 

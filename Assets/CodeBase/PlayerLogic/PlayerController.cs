@@ -7,27 +7,30 @@ namespace CodeBase.PlayerLogic
         private Rigidbody _playerRb;
         
         private const float JumpForce = 10f;
-        
-        private bool _isGrounded = true;
+        private const string Ground = "Ground";
 
-        void Start() => _playerRb = GetComponent<Rigidbody>();
+        public bool IsGrounded = true;
 
-        void Update() => Jump();
+        private void Start() => 
+            _playerRb = GetComponent<Rigidbody>();
 
-        void OnCollisionEnter(Collision other)
+        private void Update() => 
+            Jump();
+
+        private void OnCollisionEnter(Collision ground)
         {
-            if (other.gameObject.CompareTag("Ground"))
+            if (ground.gameObject.CompareTag(Ground))
             {
-                _isGrounded = true;
+                IsGrounded = true;                        
             }
         }
 
         private void Jump()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
             {
                 _playerRb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-                _isGrounded = false;
+                IsGrounded = false;
             }
         }
     }

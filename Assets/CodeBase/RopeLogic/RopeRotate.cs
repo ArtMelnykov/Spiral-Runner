@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.CoreMechanics
+namespace CodeBase.RopeLogic
 {
     public class RopeRotate : MonoBehaviour
     {
         private Quaternion _initialRopeRotation;
+        
         private readonly float _rotationSpeed = 29f;
 
         private const float MaxAngle = 40f;
@@ -14,9 +15,13 @@ namespace CodeBase.CoreMechanics
 
         private int _direction = 1;
 
-        void Start() => _initialRopeRotation = transform.localRotation;
+        private void Start() => 
+            _initialRopeRotation = transform.localRotation;
 
-        void Update()
+        private void Update() => 
+            Rotate();
+
+        private void Rotate()
         {
             _currentAngle += _direction * _rotationSpeed * Time.deltaTime;
 

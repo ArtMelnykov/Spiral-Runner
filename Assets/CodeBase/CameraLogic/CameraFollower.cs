@@ -4,16 +4,17 @@ namespace CodeBase.CameraLogic
 {
     public class CameraFollower : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField]
         private GameObject _player;
         
-        private Vector3 _offset;
+        private Vector3 _offsetPosition;
 
-        void Start()
+        private void Start()
         {
             if (_player != null)
             {
-                _offset = transform.position - _player.transform.position;
+                _offsetPosition = transform.position - _player.transform.position;
             }
             else
             {
@@ -21,6 +22,10 @@ namespace CodeBase.CameraLogic
             }
         }
 
-        void LateUpdate() => transform.position = _player.transform.position + _offset;
+        private void LateUpdate() =>
+            FollowPlayer();
+
+        private void FollowPlayer() => 
+            transform.position = _player.transform.position + _offsetPosition;
     }
 }
